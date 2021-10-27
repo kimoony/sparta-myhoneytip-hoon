@@ -35,16 +35,6 @@ export default function App() {
           title="생활"
           color="orange"
         />
-        <Button
-          style={styles.btn1}
-          title="생활"
-          color="orange"
-        />
-        <Button
-          style={styles.btn1}
-          title="생활"
-          color="orange"
-        />
       </ScrollView>
       <View style={styles.containerThree}>
 
