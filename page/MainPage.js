@@ -7,6 +7,7 @@ import Loading from '../components/Loading';
 import { StatusBar } from 'expo-status-bar';
 import * as Location from "expo-location";
 import axios from "axios"
+import { firebase_db } from "../firebaseConfig"
 
 export default function MainPage({ navigation, route }) {
   console.disableYellowBox = true;
@@ -37,12 +38,21 @@ export default function MainPage({ navigation, route }) {
       navigation.setOptions({
         title: '나만의 꿀팁'
       })
-      //꿀팁 데이터로 모두 초기화 준비
-      let tip = data.tip;
-      setState(tip)
-      setCateState(tip)
-      getLocation()
-      setReady(false)
+      firebase_db.ref('/tip').once('value').then((snapshot) => {
+        console.log("파이어베이스에서 데이터 가져왔습니다!!")
+        let tip = snapshot.val();
+        setState(tip)
+        setCateState(tip)
+        getLocation()
+        setReady(false)
+      });
+      // setTimeout(() => {
+      //   let tip = data.tip;
+      //   setState(tip)
+      //   setCateState(tip)
+      //   getLocation()
+      //   setReady(false)
+      // }, 500)
     }, 1000)
 
 
@@ -57,7 +67,7 @@ export default function MainPage({ navigation, route }) {
       const locationData = await Location.getCurrentPositionAsync();
       const latitude = locationData['coords']['latitude']
       const longitude = locationData['coords']['longitude']
-      const API_KEY = "8b4400e8424eb03dac3f2ff4dc6ae6e1";
+      const API_KEY = "cfc258c75e1da2149c33daffd07a911d";
       const result = await axios.get(
         `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
       );
