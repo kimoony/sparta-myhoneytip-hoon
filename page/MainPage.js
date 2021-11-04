@@ -46,13 +46,13 @@ export default function MainPage({ navigation, route }) {
         getLocation()
         setReady(false)
       });
-      // setTimeout(() => {
-      //   let tip = data.tip;
-      //   setState(tip)
-      //   setCateState(tip)
-      //   getLocation()
-      //   setReady(false)
-      // }, 500)
+      // setTimeout(()=>{
+      // let tip = data.tip;
+      // setState(tip)
+      // setCateState(tip)
+      // getLocation()
+      // setReady(false)
+      // },500)
     }, 1000)
 
 
